@@ -1,0 +1,28 @@
+//===-- BuiltinTypeKinds.def - Metadata about BuiltinType kinds -*- C++ -*-===//
+//
+//                     The LLVM Compiler Infrastructure
+//
+// This file is distributed under the University of Illinois Open Source
+// License. See LICENSE.TXT for details.
+//
+//===----------------------------------------------------------------------===//
+
+#ifndef INTEGER_KIND
+#define INTEGER_KIND(NAME, VALUE)
+#endif
+
+#ifndef FLOATING_POINT_KIND
+#define FLOATING_POINT_KIND(NAME, VALUE)
+#endif
+
+INTEGER_KIND(Int1, 1)
+INTEGER_KIND(Int2, 2)
+INTEGER_KIND(Int4, 4)
+INTEGER_KIND(Int8, 8)
+
+FLOATING_POINT_KIND(Real4, 4)
+FLOATING_POINT_KIND(Real8, 8)
+FLOATING_POINT_KIND(Real16, 16)
+
+#undef  FLOATING_POINT_KIND
+#undef  INTEGER_KIND

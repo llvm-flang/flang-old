@@ -1,0 +1,36 @@
+//===-- TypeNodes.def - Metadata about Type AST nodes -----------*- C++ -*-===//
+//
+//                     The LLVM Compiler Infrastructure
+//
+// This file is distributed under the University of Illinois Open Source
+// License. See LICENSE.TXT for details.
+//
+//===----------------------------------------------------------------------===//
+
+#ifndef TYPE
+  #define TYPE(Name, Parent)
+#endif
+
+#ifndef BUILTIN_TYPE
+  #define BUILTIN_TYPE(Name)
+#endif
+
+TYPE(Void, Type)
+TYPE(Builtin, Type)
+BUILTIN_TYPE(Integer)
+BUILTIN_TYPE(Real)
+BUILTIN_TYPE(Complex)
+BUILTIN_TYPE(Logical)
+TYPE(Character, Type)
+TYPE(Record, Type)
+TYPE(Pointer, Type)
+TYPE(Array, Type)
+TYPE(Function, Type)
+
+#ifdef LAST_TYPE
+  LAST_TYPE(Array)
+  #undef LAST_TYPE
+#endif
+
+#undef BUILTIN_TYPE
+#undef TYPE

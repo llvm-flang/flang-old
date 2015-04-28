@@ -1,0 +1,30 @@
+add_flang_library(flangCodeGen
+  ModuleBuilder.cpp
+  CodeGenModule.cpp
+  CodeGenFunction.cpp
+  CodeGenTypes.cpp
+  CodeGenAction.cpp
+  BackendUtil.cpp
+  TargetInfo.cpp
+  CGABI.cpp
+  CGDecl.cpp
+  CGStmt.cpp
+  CGExpr.cpp
+  CGExprScalar.cpp
+  CGExprComplex.cpp
+  CGExprCharacter.cpp
+  CGExprAgg.cpp
+  CGArray.cpp
+  CGIntrinsic.cpp
+  CGArrayIntrinsic.cpp
+  CGCall.cpp
+  CGIORuntime.cpp
+  CGIOLibflang.cpp
+  CGSystemRuntime.cpp
+  CGSystemLibflang.cpp
+)
+
+target_link_libraries(flangCodeGen
+  flangAST
+  LLVMCore
+  )

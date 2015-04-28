@@ -1,0 +1,20 @@
+add_flang_library(flangSema
+  DeclSpec.cpp
+  Scope.cpp
+  Sema.cpp
+  SemaDecl.cpp
+  SemaExecStmt.cpp
+  SemaDataStmt.cpp
+  SemaExpr.cpp
+  SemaArrayExpr.cpp
+  SemaChecking.cpp
+  SemaIntrinsic.cpp
+  SemaFormat.cpp
+  SemaIO.cpp
+  SemaEquivalence.cpp
+  Spec.cpp
+  )
+
+target_link_libraries(flangSema
+  flangAST
+  )

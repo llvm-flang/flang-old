@@ -1,0 +1,12 @@
+! RUN: %flang -emit-llvm -o - %s
+
+SUBROUTINE SUB(LEN, IMAT)
+  INTEGER LEN, IMAT(LEN, *)
+END
+
+PROGRAM test
+  INTEGER IMAT(4,4)
+
+  IMAT = 0
+  CALL SUB(4, -IMAT + 1)
+END
