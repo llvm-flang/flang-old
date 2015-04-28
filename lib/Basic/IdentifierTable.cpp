@@ -140,13 +140,13 @@ void IdentifierTable::PrintStats() const {
   }
 
   fprintf(stderr, "\n*** Identifier Tables Stats:\n");
-  fprintf(stderr, "# Identifiers:   %d\n", NumIdentifiers);
-  fprintf(stderr, "# Empty Buckets: %d\n", NumEmptyBuckets);
+  fprintf(stderr, "# Identifiers:   %u\n", NumIdentifiers);
+  fprintf(stderr, "# Empty Buckets: %u\n", NumEmptyBuckets);
   fprintf(stderr, "Hash density (#identifiers per bucket): %f\n",
           NumIdentifiers / (double)NumBuckets);
   fprintf(stderr, "Ave identifier length: %f\n",
           (AverageIdentifierSize / (double)NumIdentifiers));
-  fprintf(stderr, "Max identifier length: %d\n", MaxIdentifierLength);
+  fprintf(stderr, "Max identifier length: %u\n", MaxIdentifierLength);
 
   // Compute statistics about the memory allocated for identifiers
   IdentifierHashTable.getAllocator().PrintStats();
