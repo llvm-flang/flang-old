@@ -16,12 +16,12 @@ Flang.
 
 > git clone https://github.com/llvm-mirror/llvm.git
 > cd llvm
-> git checkout -t origin/release_36
+> git clone http://llvm.org/git/llvm.git
 
 Download the Flang source code within the LLVM tree, the two will be compiled
 together.
 
-> cd tools & git clone git://github.com/llvm-flang/flang.git
+> cd llvm/tools & git clone git://github.com/llvm-flang/flang.git
 
 Compile LLVM and Flang together.
 
