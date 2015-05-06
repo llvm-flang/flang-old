@@ -242,8 +242,9 @@ void ArrayValueExprEmitter::VisitVarExpr(const VarExpr *E) {
     if(VD->isArgument())
       Ptr = CGF.GetVarPtr(VD);
     else
-      Ptr = Builder.CreateConstInBoundsGEP2_32(Ptr->getType(),
-                                               CGF.GetVarPtr(VD), 0, 0, NULL);
+      Ptr = Builder.CreateConstInBoundsGEP2_32(
+          CGF.GetVarPtr(VD)->getType()->getArrayElementType(),
+          CGF.GetVarPtr(VD), 0, 0);
   }
   EmitSections();
 }
