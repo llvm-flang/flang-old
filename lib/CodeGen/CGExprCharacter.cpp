@@ -188,9 +188,9 @@ llvm::Value *CodeGenFunction::GetCharacterTypeLength(QualType T) {
 
 CharacterValueTy CodeGenFunction::GetCharacterValueFromPtr(llvm::Value *Ptr,
                                                            QualType StorageType) {
-  return CharacterValueTy(Builder.CreateConstInBoundsGEP2_32(Ptr->getType(),
-                                                             Ptr, 0, 0),
-                          GetCharacterTypeLength(StorageType));
+  return CharacterValueTy(Builder.CreateConstInBoundsGEP2_32(
+                      Ptr->getType()->getArrayElementType(),Ptr, 0, 0),
+                    GetCharacterTypeLength(StorageType));
 }
 
 CharacterValueTy CodeGenFunction::EmitCharacterExpr(const Expr *E) {
