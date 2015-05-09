@@ -256,7 +256,8 @@ std::string GetOutputName(StringRef Filename,
   return std::string(Path.begin(), Path.size());
 }
 
-static bool EmitFile(llvm::raw_ostream &Out,
+//static bool EmitFile(llvm::raw_ostream &Out,
+static bool EmitFile(llvm::raw_pwrite_stream &Out,
                      llvm::Module *Module,
                      llvm::TargetMachine* TM,
                      BackendAction Action) {
@@ -264,9 +265,19 @@ static bool EmitFile(llvm::raw_ostream &Out,
   if(Action == Backend_EmitObj || Action == Backend_EmitAssembly){
     llvm::Module &Mod = *Module;
     llvm::TargetMachine &Target = *TM;
+#if 0
     llvm::TargetMachine::CodeGenFileType FileType =
       Action == Backend_EmitObj ? llvm::TargetMachine::CGFT_ObjectFile :
                                   llvm::TargetMachine::CGFT_AssemblyFile;
+#endif
+    llvm::TargetMachine::CodeGenFileType CGFT = llvm::TargetMachine::CGFT_AssemblyFile;
+
+    if (Action == Backend_EmitObj)
+      CGFT = llvm::TargetMachine::CGFT_ObjectFile;
+    else if (Action == Backend_EmitMCNull)
+      CGFT = llvm::TargetMachine::CGFT_Null;
+    else
+      assert(Action == Backend_EmitAssembly && "Invalid action!");
 
     llvm::legacy::PassManager PM;
 
@@ -279,15 +290,16 @@ static bool EmitFile(llvm::raw_ostream &Out,
     //if (Target.addPassesToEmitFile(PM, FOS, FileType, true)) {
     //  return true;
     //}
+    if( TM->addPassesToEmitFile(PM, Out, CGFT, true, nullptr, nullptr)){
+      return false;
+    }
 
     PM.run(Mod);
-  }
-  else if(Action == Backend_EmitBC ){
+  } else if(Action == Backend_EmitBC ){
     llvm::WriteBitcodeToFile(Module, Out);
   } else if(Action == Backend_EmitLL ) {
     Module->print(Out, nullptr);
   }
-  return false;
 }
 
 static bool EmitOutputFile(const std::string &Input,
