@@ -295,11 +295,16 @@ static bool EmitFile(llvm::raw_pwrite_stream &Out,
     }
 
     PM.run(Mod);
+    return true;
   } else if(Action == Backend_EmitBC ){
     llvm::WriteBitcodeToFile(Module, Out);
+    return true;
   } else if(Action == Backend_EmitLL ) {
     Module->print(Out, nullptr);
+    return true;
   }
+
+  return false;
 }
 
 static bool EmitOutputFile(const std::string &Input,
