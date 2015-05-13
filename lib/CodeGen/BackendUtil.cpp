@@ -362,7 +362,9 @@ TargetMachine *EmitAssemblyHelper::CreateTargetMachine(bool MustCreateTM) {
   Options.NoNaNsFPMath = CodeGenOpts.NoNaNsFPMath;
   Options.NoZerosInBSS = CodeGenOpts.NoZeroInitializedInBSS;
   Options.UnsafeFPMath = CodeGenOpts.UnsafeFPMath;
-  Options.UseSoftFloat = CodeGenOpts.SoftFloat;
+  //TODO : This definition has moved to Module code rather thn TargetOptions
+  //       This is true from LLVM trunk r237079 and beyond
+  //Options.UseSoftFloat = CodeGenOpts.SoftFloat; 
   Options.StackAlignmentOverride = CodeGenOpts.StackAlignment;
   //Options.RealignStack = CodeGenOpts.StackRealignment;
   Options.DisableTailCalls = CodeGenOpts.DisableTailCalls;
