@@ -259,8 +259,10 @@ llvm::Value* CodeGenFunction::EmitIntrinsicCallScalarMath(intrinsic::FunctionKin
   default:
     llvm_unreachable("invalid scalar math intrinsic");
   }
-  if(A2)
-    return Builder.CreateCall2(FuncDecl, A1, A2);
+  if(A2) {
+    llvm::Value *Args[] = {A1, A2};
+    return Builder.CreateCall(FuncDecl, Args);
+  }
   return Builder.CreateCall(FuncDecl, A1);
 }
 
