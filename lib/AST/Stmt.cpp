@@ -146,15 +146,15 @@ ParameterStmt *ParameterStmt::Create(ASTContext &C, SourceLocation Loc,
 //===----------------------------------------------------------------------===//
 
 ImplicitStmt::ImplicitStmt(SourceLocation Loc, Expr *StmtLabel)
-  : Stmt(ImplicitStmtClass, Loc, StmtLabel), None(true),
-    LetterSpec(LetterSpecTy(nullptr,nullptr)) {
+  : Stmt(ImplicitStmtClass, Loc, StmtLabel),
+    LetterSpec(LetterSpecTy(nullptr,nullptr)), None(true) {
 }
 
 ImplicitStmt::ImplicitStmt(SourceLocation Loc, QualType T,
                            LetterSpecTy Spec,
                            Expr *StmtLabel)
-  : Stmt(ImplicitStmtClass, Loc, StmtLabel), Ty(T), None(false),
-    LetterSpec(Spec) {}
+  : Stmt(ImplicitStmtClass, Loc, StmtLabel), Ty(T), LetterSpec(Spec),
+    None(false) {}
 
 ImplicitStmt *ImplicitStmt::Create(ASTContext &C, SourceLocation Loc,
                                    Expr *StmtLabel) {
@@ -303,8 +303,8 @@ EquivalenceSet *EquivalenceSet::Create(ASTContext &C, ArrayRef<Object> Objects) 
 //===----------------------------------------------------------------------===//
 
 CommonBlockSet::CommonBlockSet(CommonBlockDecl *CBDecl)
-  : StorageSet(CommonBlockSetClass), Decl(CBDecl),
-    ObjectCount(0) { }
+  : StorageSet(CommonBlockSetClass), ObjectCount(0),
+    Decl(CBDecl) { }
 
 CommonBlockSet *CommonBlockSet::Create(ASTContext &C, CommonBlockDecl *CBDecl) {
   return new(C) CommonBlockSet(CBDecl);
@@ -531,7 +531,7 @@ DoWhileStmt *DoWhileStmt::Create(ASTContext &C, SourceLocation Loc,
 //===----------------------------------------------------------------------===//
 
 CycleStmt::CycleStmt(SourceLocation Loc, Expr *StmtLabel, Stmt *loop, ConstructName loopName)
-  : Stmt(CycleStmtClass, Loc, StmtLabel), Loop(loop), LoopName(loopName) {}
+  : Stmt(CycleStmtClass, Loc, StmtLabel), LoopName(loopName), Loop(loop)  {}
 
 CycleStmt *CycleStmt::Create(ASTContext &C, SourceLocation Loc, Stmt *Loop,
                              Expr *StmtLabel, ConstructName LoopName) {
@@ -557,7 +557,7 @@ ExitStmt *ExitStmt::Create(ASTContext &C, SourceLocation Loc, Stmt *Loop,
 SelectCaseStmt::SelectCaseStmt(SourceLocation Loc, Expr *Operand,
                                Expr *StmtLabel, ConstructName Name)
   : CFBlockStmt(SelectCaseStmtClass, Loc, StmtLabel, Name),
-    E(Operand), FirstCase(nullptr), DefaultCase(nullptr) {}
+    FirstCase(nullptr), DefaultCase(nullptr), E(Operand) {}
 
 SelectCaseStmt *SelectCaseStmt::Create(ASTContext &C, SourceLocation Loc,
                                        Expr *Operand, Expr *StmtLabel,

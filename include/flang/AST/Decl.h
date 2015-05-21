@@ -598,7 +598,7 @@ public:
     return IsSequence;
   }
 
-  bool setIsSequence(bool V) { IsSequence = V; }
+  void setIsSequence(bool V) { IsSequence = V; }
 
   static bool classof(const Decl *D) { return classofKind(D->getKind()); }
   static bool classof(const RecordDecl *D) { return true; }
@@ -741,7 +741,7 @@ private:
                int Attr)
     : DeclaratorDecl(DK, DC, NameInfo.getLoc(), NameInfo.getName(), T),
       DeclContext(DK), ArgumentCount(0), Arguments(nullptr),
-      Body((Stmt*)nullptr), Result(nullptr) {
+      Result(nullptr), Body((Stmt*)nullptr) {
       CustomBoolAttr1 = (Attr & Recursive) != 0;
       SubDeclKind = FK;
     }

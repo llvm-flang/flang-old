@@ -58,6 +58,7 @@ protected:
   Expr(ExprClass ET, QualType T, SourceLocation L) : ExprID(ET), Loc(L) {
     setType(T);
   }
+
 public:
   QualType getType() const { return Ty; }
   void setType(QualType T) { Ty = T; }
@@ -119,7 +120,7 @@ class ConstantExpr : public Expr {
   SourceLocation MaxLoc;
 protected:
   ConstantExpr(ExprClass Ty, QualType T, SourceLocation Loc, SourceLocation MLoc)
-    : Expr(Ty, T, Loc), MaxLoc(MLoc), Kind(0) {}
+    : Expr(Ty, T, Loc), Kind(0), MaxLoc(MLoc) {}
 public:
   Expr *getKindSelector() const { return Kind; }
   void setKindSelector(Expr *K) { Kind = K; }

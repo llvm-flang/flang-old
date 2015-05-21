@@ -208,7 +208,7 @@ public:
   DiagnosticsEngine(const llvm::IntrusiveRefCntPtr<DiagnosticIDs> &D,
                     llvm::SourceMgr *SM, DiagnosticClient *DC,
                     bool ShouldOwnClient = true)
-    : Diags(D), Client(DC), OwnsDiagClient(ShouldOwnClient), SrcMgr(SM)
+    : Client(DC), OwnsDiagClient(ShouldOwnClient), SrcMgr(SM), Diags(D)
   { Reset(); }
 
   const llvm::IntrusiveRefCntPtr<DiagnosticIDs> &getDiagnosticIDs() const {

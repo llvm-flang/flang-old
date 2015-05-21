@@ -66,10 +66,11 @@ protected:
   }
 
   Stmt(StmtClass ID, SourceLocation L, Expr *SLT)
-    : StmtID(ID), Loc(L), StmtLabel(SLT),
+    : StmtID(ID),
       IsStmtLabelUsed(0),
       IsStmtLabelUsedAsGotoTarget(0),
-      IsStmtLabelUsedAsAssignTarget(0) {}
+      IsStmtLabelUsedAsAssignTarget(0),
+      Loc(L), StmtLabel(SLT) {}
 public:
   virtual ~Stmt();
 
@@ -603,7 +604,9 @@ class DataStmt : public Stmt {
   unsigned NumNames;
   unsigned NumValues;
   Expr **NameList, **ValueList;
-  Stmt *Body;
+
+  // Body is not used: comment out for now to avoid warnings
+  //Stmt *Body;
 
   DataStmt(ASTContext &C, SourceLocation Loc,
            ArrayRef<Expr*> Objects,
