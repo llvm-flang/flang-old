@@ -22,19 +22,20 @@
 
 namespace flang {
 
-static const enum llvm::raw_ostream::Colors noteColor =
-  llvm::raw_ostream::BLACK;
-static const enum llvm::raw_ostream::Colors fixitColor =
-  llvm::raw_ostream::GREEN;
-static const enum llvm::raw_ostream::Colors caretColor =
-  llvm::raw_ostream::GREEN;
-static const enum llvm::raw_ostream::Colors warningColor =
-  llvm::raw_ostream::MAGENTA;
-static const enum llvm::raw_ostream::Colors errorColor = llvm::raw_ostream::RED;
-static const enum llvm::raw_ostream::Colors fatalColor = llvm::raw_ostream::RED;
-// Used for changing only the bold attribute.
-static const enum llvm::raw_ostream::Colors savedColor =
-  llvm::raw_ostream::SAVEDCOLOR;
+// These declarations are not currently used and will provoke warnings
+//static const enum llvm::raw_ostream::Colors noteColor =
+//  llvm::raw_ostream::BLACK;
+//static const enum llvm::raw_ostream::Colors fixitColor =
+//  llvm::raw_ostream::GREEN;
+//static const enum llvm::raw_ostream::Colors caretColor =
+//  llvm::raw_ostream::GREEN;
+//static const enum llvm::raw_ostream::Colors warningColor =
+//  llvm::raw_ostream::MAGENTA;
+//static const enum llvm::raw_ostream::Colors errorColor = llvm::raw_ostream::RED;
+//static const enum llvm::raw_ostream::Colors fatalColor = llvm::raw_ostream::RED;
+//// Used for changing only the bold attribute.
+//static const enum llvm::raw_ostream::Colors savedColor =
+//  llvm::raw_ostream::SAVEDCOLOR;
 
 /// \brief Number of spaces to indent when word-wrapping.
 const unsigned WordWrapIndentation = 6;

@@ -189,7 +189,8 @@ llvm::Value *CodeGenFunction::EmitScalarBinaryExpr(BinaryExpr::Operator Op,
     auto Func = GetIntrinsicFunction(Intrinsic,
                                      LHS->getType(),
                                      RHS->getType());
-    Result = Builder.CreateCall2(Func, LHS, RHS);
+    llvm::Value *PowerArgs[] = {LHS, RHS};
+    Result = Builder.CreateCall(Func, PowerArgs);
     break;
   }
 

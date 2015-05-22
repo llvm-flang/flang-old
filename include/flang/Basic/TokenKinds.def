@@ -23,7 +23,7 @@
 #ifndef FORMAT_SPEC
 #define FORMAT_SPEC(X, Y) TOK(fs_ ## X)
 #endif
-#ifndef OPERATOR(X,Y)
+#ifndef OPERATOR
 #define OPERATOR(X,Y) TOK(kw_ ## X)
 #endif
 

@@ -130,7 +130,7 @@ public:
   }
   void setLiteralData(const char *Ptr) {
     assert(isLiteral() && "Cannot set literal data of non-literal");
-    PtrData = (void*)Ptr;
+    PtrData = const_cast<char*>(Ptr);
   }
 
   /// setFlag - Set the specified flag.
