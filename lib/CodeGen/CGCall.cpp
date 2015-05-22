@@ -396,21 +396,20 @@ llvm::Value *CodeGenFunction::EmitCallArgPtr(const Expr *E) {
 
 
 llvm::CallInst *CodeGenFunction::EmitRuntimeCall(llvm::Value *Func) {
-  llvm::Value *Args[] = {};
-  auto Result = Builder.CreateCall(Func, Args);
+  auto Result = Builder.CreateCall(Func, NULL, llvm::Twine(Func->getName()));
   Result->setCallingConv(CGM.getRuntimeCC());
   return Result;
 }
 
 llvm::CallInst *CodeGenFunction::EmitRuntimeCall(llvm::Value *Func, llvm::ArrayRef<llvm::Value*> Args) {
-  auto Result = Builder.CreateCall(Func, Args);
+  auto Result = Builder.CreateCall(Func, Args, llvm::Twine(Func->getName()));
   Result->setCallingConv(CGM.getRuntimeCC());
   return Result;
 }
 
 llvm::CallInst *CodeGenFunction::EmitRuntimeCall2(llvm::Value *Func, llvm::Value *A1, llvm::Value *A2) {
   llvm::Value *Args[] = {A1, A2};
-  auto Result = Builder.CreateCall(Func, Args);
+  auto Result = Builder.CreateCall(Func, Args, llvm::Twine(Func->getName()));
   Result->setCallingConv(CGM.getRuntimeCC());
   return Result;
 }
