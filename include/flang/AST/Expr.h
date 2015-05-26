@@ -647,7 +647,7 @@ public:
   }
 };
 
-/// ImpliedShapeSpec - An implied-shape array is a named constant taht takes its
+/// ImpliedShapeSpec - An implied-shape array is a named constant that takes its
 /// shape from the constant-expr in its declaration.
 ///
 ///   [R522]:

@@ -42,7 +42,7 @@ class IdentifierInfo;
 class Token;
 class VarDecl;
 
-/// Sema - This implements semantic analysis and AST buiding for Fortran.
+/// Sema - This implements semantic analysis and AST building for Fortran.
 class Sema {
   Sema(const Sema&);           // DO NOT IMPLEMENT
   void operator=(const Sema&); // DO NOT IMPLEMENT

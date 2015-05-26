@@ -24,7 +24,7 @@
 
 namespace flang {
 
-// ParseExpression - Expressions are level-5 expresisons optionally involving
+// ParseExpression - Expressions are level-5 expressions optionally involving
 // defined binary operators.
 //
 //   R722:
@@ -643,6 +643,12 @@ ExprResult Parser::ParseNameOrCall() {
       // FIXME: accessing function results from inner recursive functions
       return ParseRecursiveCallExpression(IDRange);
     }
+    // the VarDecl is obtained from a NamedDecl which does not have a type
+    // apply implicit typing rules in case VD does not have a type
+    // FIXME: there should be a way to avoid re-applying the implicit rules
+    // by returning a VarDecl instead of a NamedDecl when looking up a name in
+    // the scope
+    if (VD->getType().isNull()) Actions.ApplyImplicitRulesToArgument(VD,IDRange);
     return VarExpr::Create(Context, IDRange, VD);
   }
   else if(IntrinsicFunctionDecl *IFunc = dyn_cast<IntrinsicFunctionDecl>(Declaration)) {
