@@ -320,6 +320,12 @@ TargetMachine *EmitAssemblyHelper::CreateTargetMachine(bool MustCreateTM) {
   llvm::TargetOptions Options;
 
   // Set frame pointer elimination mode.
+  // WARNING: This code is now dead for LLVM trunk checkin r238244
+  // The checkin in question removes the global variable NoFramePointerElim 
+  // from TargetOptions in favor of using resetTargetOptions.  This function
+  // resides in TargetMachine and called for individual function instances
+  // via the DAG selection. 
+#if 0
   if (!CodeGenOpts.DisableFPElim) {
     Options.NoFramePointerElim = false;
     //Options.NoFramePointerElimNonLeaf = false;
@@ -330,6 +336,7 @@ TargetMachine *EmitAssemblyHelper::CreateTargetMachine(bool MustCreateTM) {
     Options.NoFramePointerElim = true;
     //Options.NoFramePointerElimNonLeaf = true;
   }
+#endif
 
   if (CodeGenOpts.UseInitArray)
     Options.UseInitArray = true;
