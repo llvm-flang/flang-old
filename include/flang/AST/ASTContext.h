@@ -88,9 +88,7 @@ public:
     BumpAlloc.Deallocate((const void*) Ptr, size);
   }
 
-  LangOptions getLangOpts() const {
-    return LanguageOptions;
-  }
+  const LangOptions& getLangOpts() const { return LanguageOptions; }
 
   // Builtin Types: [R404]
   QualType VoidTy;

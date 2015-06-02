@@ -58,6 +58,7 @@ protected:
   Expr(ExprClass ET, QualType T, SourceLocation L) : ExprID(ET), Loc(L) {
     setType(T);
   }
+  //virtual ~Expr() {}
 
 public:
   QualType getType() const { return Ty; }
@@ -66,8 +67,8 @@ public:
   ExprClass getExprClass() const { return ExprID; }
   SourceLocation getLocation() const { return Loc; }
 
-  virtual SourceLocation getLocStart() const { return Loc; }
-  virtual SourceLocation getLocEnd() const { return Loc; }
+  SourceLocation getLocStart() const { return Loc; }
+  SourceLocation getLocEnd() const { return Loc; }
 
   inline SourceRange getSourceRange() const {
     return SourceRange(getLocStart(), getLocEnd());
@@ -121,6 +122,8 @@ class ConstantExpr : public Expr {
 protected:
   ConstantExpr(ExprClass Ty, QualType T, SourceLocation Loc, SourceLocation MLoc)
     : Expr(Ty, T, Loc), Kind(0), MaxLoc(MLoc) {}
+  virtual ~ConstantExpr() {}
+
 public:
   Expr *getKindSelector() const { return Kind; }
   void setKindSelector(Expr *K) { Kind = K; }
@@ -205,6 +208,8 @@ class IntegerConstantExpr : public ConstantExpr {
   IntegerConstantExpr(ASTContext &C, SourceRange Range,
                       StringRef Data);
   IntegerConstantExpr(ASTContext &C, SourceRange Range, APInt Value);
+  virtual ~IntegerConstantExpr() {}
+
 public:
   static IntegerConstantExpr *Create(ASTContext &C, SourceRange Range,
                                      StringRef Data);
@@ -227,6 +232,8 @@ private:
   APFloatStorage Num;
   RealConstantExpr(ASTContext &C, SourceRange Range,
                    llvm::StringRef Data, QualType Type);
+  virtual ~RealConstantExpr() {}
+
 public:
   static RealConstantExpr *Create(ASTContext &C, SourceRange Range,
                                   llvm::StringRef Data,
@@ -245,6 +252,8 @@ private:
   Expr *Re, *Im;
   ComplexConstantExpr(ASTContext &C, SourceRange Range,
                       Expr *Real, Expr *Imaginary, QualType Type);
+  virtual ~ComplexConstantExpr() {}
+
 public:
   static ComplexConstantExpr *Create(ASTContext &C, SourceRange Range,
                                      Expr *Real, Expr *Imaginary,
@@ -265,6 +274,7 @@ class CharacterConstantExpr : public ConstantExpr {
   CharacterConstantExpr(char *Str, SourceRange Range, QualType T);
   CharacterConstantExpr(ASTContext &C, SourceRange Range,
                         StringRef Data, QualType T);
+  virtual ~CharacterConstantExpr() {}
 public:
   static CharacterConstantExpr *Create(ASTContext &C, SourceRange Range,
                                        StringRef Data, QualType T);
@@ -294,6 +304,8 @@ private:
   BOZKind Kind;
   BOZConstantExpr(ASTContext &C, SourceLocation Loc,
                   SourceLocation MaxLoc, llvm::StringRef Data);
+  virtual ~BOZConstantExpr() {}
+
 public:
   static BOZConstantExpr *Create(ASTContext &C, SourceLocation Loc,
                                  SourceLocation MaxLoc, llvm::StringRef Data);
@@ -317,6 +329,8 @@ class LogicalConstantExpr : public ConstantExpr {
 
   LogicalConstantExpr(ASTContext &C, SourceRange Range,
                       llvm::StringRef Data, QualType T);
+  virtual ~LogicalConstantExpr() {}
+
 public:
   static LogicalConstantExpr *Create(ASTContext &C, SourceRange Range,
                                      llvm::StringRef Data, QualType T);
@@ -560,6 +574,8 @@ private:
   const ArraySpec &operator=(const ArraySpec&);
 protected:
   ArraySpec(ArraySpecKind K);
+  virtual ~ArraySpec() {}
+
 public:
   ArraySpecKind getKind() const { return Kind; }
 
@@ -586,6 +602,7 @@ class ExplicitShapeSpec : public ArraySpec {
 
   ExplicitShapeSpec(Expr *LB, Expr *UB);
   ExplicitShapeSpec(Expr *UB);
+
 public:
   static ExplicitShapeSpec *Create(ASTContext &C, Expr *UB);
   static ExplicitShapeSpec *Create(ASTContext &C, Expr *LB,

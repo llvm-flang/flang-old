@@ -67,6 +67,8 @@ llvm::Type *CodeGenTypes::ConvertBuiltInType(BuiltinType::TypeSpec Spec,
                                              BuiltinType::TypeKind Kind) {
   llvm::Type *Type;
   switch(Kind) {
+  default:
+    break;
   case BuiltinType::Int1:
     return CGM.Int8Ty;
   case BuiltinType::Int2:

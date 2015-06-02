@@ -235,6 +235,23 @@ void Sema::DeclareStatementLabel(Expr *StmtLabel, Stmt *S) {
     getCurrentStmtLabelScope()->Declare(StmtLabel, S);
     /// Check to see if it matches the last do stmt.
     CheckStatementLabelEndDo(StmtLabel, S);
+
+    // Check to see if it matches any other enclosing do stmt and possibly
+    // replicate the body (nested loops with same label)
+    DoStmt *Result = nullptr;
+    auto Stack = getCurrentBody()->ControlFlowStack;
+    for(size_t I = Stack.size(); I != 0;) {
+      --I;
+      if(auto Do = dyn_cast<DoStmt>(Stack[I].Statement)) {
+        if(Stack[I].hasExpectedDoLabel()) {
+          if(getCurrentStmtLabelScope()->IsSame(Stack[I].ExpectedEndDoLabel, StmtLabel)) {
+            RemoveLoopVar(Do->getDoVar());
+            // leave the last statement
+            getCurrentBody()->Leave(Context);
+          }
+        }
+      }
+    }
   }
 }
 

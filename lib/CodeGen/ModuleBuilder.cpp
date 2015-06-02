@@ -42,9 +42,8 @@ namespace {
                       const CodeGenOptions &CGO,
                       const TargetOptions &TO,
                       llvm::LLVMContext& C)
-      : Diags(diags), CodeGenOpts(CGO),
-        M(new llvm::Module(ModuleName, C)),
-        Target(TO) {}
+      : Diags(diags), CodeGenOpts(CGO), Target(TO),
+        M(new llvm::Module(ModuleName, C)) {}
 
     virtual ~CodeGeneratorImpl() {}
 

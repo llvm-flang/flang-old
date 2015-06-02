@@ -17,18 +17,21 @@ namespace CodeGen {
 
 class FortranABI {
 public:
+  virtual ~FortranABI() {}
   virtual ABIArgInfo GetArgABI(QualType ArgType);
   virtual ABIRetInfo GetRetABI(QualType RetType);
 };
 
 class LibflangABI : public FortranABI {
 public:
+  virtual ~LibflangABI() {}
   ABIArgInfo GetArgABI(QualType ArgType);
   ABIRetInfo GetRetABI(QualType RetType);
 };
 
 class LibflangTransferABI : public LibflangABI {
 public:
+  virtual ~LibflangTransferABI() {}
   ABIArgInfo GetArgABI(QualType ArgType);
 };
 

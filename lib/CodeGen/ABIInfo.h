@@ -110,6 +110,7 @@ public:
 /// passed or returned from functions.
 class ABIInfo {
 public:
+  virtual ~ABIInfo() {}
   virtual void computeReturnTypeInfo(QualType T, ABIRetInfo &Info) const = 0;
 };
 

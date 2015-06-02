@@ -138,16 +138,16 @@ private:
   llvm::Value *V2;
 
   RValueTy(llvm::Value *V, Kind Type)
-    : V1(V), ValueType(Type) {}
+    : ValueType(Type), V1(V) {}
 public:
 
   RValueTy() : ValueType(None) {}
   RValueTy(llvm::Value *V)
-    : V1(V), ValueType(Scalar) {}
+    : ValueType(Scalar), V1(V) {}
   RValueTy(ComplexValueTy C)
-    : V1(C.Re), V2(C.Im), ValueType(Complex) {}
+    : ValueType(Complex), V1(C.Re), V2(C.Im) {}
   RValueTy(CharacterValueTy CharValue)
-    : V1(CharValue.Ptr), V2(CharValue.Len), ValueType(Character) {}
+    : ValueType(Character), V1(CharValue.Ptr), V2(CharValue.Len) {}
 
   Kind getType() const {
     return ValueType;
