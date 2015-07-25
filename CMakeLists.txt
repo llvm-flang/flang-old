@@ -222,7 +222,7 @@ endif ()
 #  ${FLANG_SOURCE_DIR}/include/flang/Config/config.h.cmake
 #  ${FLANG_BINARY_DIR}/include/flang/Config/config.h)
 
-include(LLVMParseArguments)
+#include(LLVMParseArguments)
 
 # Enable C++ 11
 if(NOT MSVC)
