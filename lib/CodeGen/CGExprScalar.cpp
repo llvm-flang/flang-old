@@ -187,8 +187,7 @@ llvm::Value *CodeGenFunction::EmitScalarBinaryExpr(BinaryExpr::Operator Op,
       RHS = EmitIntToInt32Conversion(RHS);
     }
     auto Func = GetIntrinsicFunction(Intrinsic,
-                                     LHS->getType(),
-                                     RHS->getType());
+                                     LHS->getType());
     llvm::Value *PowerArgs[] = {LHS, RHS};
     Result = Builder.CreateCall(Func, PowerArgs);
     break;
