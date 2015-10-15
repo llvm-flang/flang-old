@@ -94,7 +94,7 @@ void CodeGenFunction::EmitAggregateAssignment(const Expr *LHS, const Expr *RHS) 
 }
 
 llvm::Value *CodeGenFunction::EmitAggregateMember(llvm::Value *Agg, const FieldDecl *Field) {
-  return Builder.CreateStructGEP(Agg->getType(), Agg, Field->getIndex());
+  return Builder.CreateStructGEP(nullptr, Agg, Field->getIndex());
 }
 
 void CodeGenFunction::EmitAggregateReturn(const CGFunctionInfo::RetInfo &Info, llvm::Value *Ptr) {

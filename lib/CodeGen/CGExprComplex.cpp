@@ -62,10 +62,10 @@ ComplexValueTy ComplexExprEmitter::VisitComplexConstantExpr(const ComplexConstan
 }
 
 ComplexValueTy CodeGenFunction::EmitComplexLoad(llvm::Value *Ptr, bool IsVolatile) {
-  auto Re = Builder.CreateLoad(Builder.CreateStructGEP(Ptr->getType(),
+  auto Re = Builder.CreateLoad(Builder.CreateStructGEP(nullptr,
                                                        Ptr,
                                                        0), IsVolatile);
-  auto Im = Builder.CreateLoad(Builder.CreateStructGEP(Ptr->getType(),
+  auto Im = Builder.CreateLoad(Builder.CreateStructGEP(nullptr,
                                                        Ptr,
                                                        1), IsVolatile);
   return ComplexValueTy(Re, Im);
@@ -73,9 +73,9 @@ ComplexValueTy CodeGenFunction::EmitComplexLoad(llvm::Value *Ptr, bool IsVolatil
 
 void CodeGenFunction::EmitComplexStore(ComplexValueTy Value, llvm::Value *Ptr,
                                        bool IsVolatile) {
-  Builder.CreateStore(Value.Re, Builder.CreateStructGEP(Ptr->getType(),
+  Builder.CreateStore(Value.Re, Builder.CreateStructGEP(nullptr,
                                                         Ptr,0), IsVolatile);
-  Builder.CreateStore(Value.Im, Builder.CreateStructGEP(Ptr->getType(),
+  Builder.CreateStore(Value.Im, Builder.CreateStructGEP(nullptr,
                                                         Ptr,1), IsVolatile);
 }
 
