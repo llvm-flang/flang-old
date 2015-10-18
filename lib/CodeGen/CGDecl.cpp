@@ -102,7 +102,7 @@ void CodeGenFunction::EmitVarInitializer(const VarDecl *D) {
   auto T = D->getType();
   if(T->isArrayType()) {
     auto Dest = Builder.CreateConstInBoundsGEP2_32(ConvertTypeForMem(T),
-                                                   GetVarPtr(D), 0, 0, NULL );
+                                                   GetVarPtr(D), 0, 0);
     auto Init = cast<ArrayConstructorExpr>(D->getInit())->getItems();
     for(size_t I = 0; I < Init.size(); ++I) {
       auto Val = EmitRValue(Init[I]);

@@ -61,7 +61,7 @@ llvm::Value *CGLibflangSystemRuntime::EmitETIME(CodeGenFunction &CGF, ArrayRef<E
   CGF.EmitCallArg(ArgList, Arr, Func.getInfo()->getArguments()[0]);
   CGF.EmitCallArg(ArgList,
                   CGF.getBuilder().CreateConstInBoundsGEP1_32(
-                    CGF.ConvertTypeForMem(RealTy),Arr, 1, NULL),
+                    CGF.ConvertTypeForMem(RealTy),Arr, 1),
                   Func.getInfo()->getArguments()[1]);
   return CGF.EmitCall(Func.getFunction(), Func.getInfo(), ArgList).asScalar();
 }
