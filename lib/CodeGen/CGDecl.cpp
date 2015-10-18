@@ -179,8 +179,8 @@ void CodeGenFunction::EmitCommonBlock(const CommonBlockSet *S) {
   for(auto Obj : S->getObjects()) {
     if(Obj.Var) {
       LocalVariables.insert(std::make_pair(Obj.Var,
-        Builder.CreateStructGEP(ConvertTypeForMem(Obj.Var->getType()), 
-                                Ptr, Idx, NULL)));
+        Builder.CreateStructGEP(nullptr,
+                                Ptr, Idx)));
     }
     ++Idx;
   }
