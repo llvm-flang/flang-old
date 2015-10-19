@@ -158,7 +158,7 @@ bool Sema::ApplySaveSpecification(SourceLocation Loc, SourceLocation IDLoc,
 
 bool Sema::ApplySaveSpecification(SourceLocation Loc, SourceLocation IDLoc,
                                   VarDecl *VD) {
-  if(VD->hasStorageSet()) {
+  if(VD->hasStorageSet() && IDLoc.isValid()) {
     if(auto CBSet = dyn_cast<CommonBlockSet>(VD->getStorageSet())) {
       Diags.Report(Loc, diag::err_spec_not_applicable_to_common_block)
         << "save" << getTokenRange(IDLoc);
